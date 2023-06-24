@@ -12,6 +12,7 @@
     "socket.io-client": "^4.6.2",
     "web-vitals": "^2.1.4"
   },
+  "proxy":"https://videoserverwithsocket.onrender.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
