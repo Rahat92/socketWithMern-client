@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
 import { readableDate } from "./readableDate";
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect();
 function App() {
   const videoRef = useRef();
   const [message, setMessage] = useState({
