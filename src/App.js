@@ -42,10 +42,10 @@ function App() {
   useEffect(() => {
     if (timerArr.length === 0) return;
     console.log("Hi world, Hello, ", timerArr[0]);
-    if (timerArr[0]) {
+    if (time&&timerArr[0]) {
       videoRef.current.currentTime = timerArr[0];
     }
-  }, [timerArr[0]]);
+  }, [timerArr[0], time]);
 
   useEffect(() => {
     socket.on("receive_message", (msg) => {
@@ -53,12 +53,10 @@ function App() {
     });
     socket.on("start_video", (msg) => {
       setTime(msg);
-      socket.on("count", (msg) => {});
     });
 
     socket.on("count", (msg) => {
       setTimer(msg);
-      // if(timerArr.length > 0) return
       if (timerArr.length < 1) {
         setTimerArr([...timerArr, msg]);
       } else {
