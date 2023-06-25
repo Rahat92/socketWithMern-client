@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
 import { readableDate } from "./readableDate";
-const socket = io.connect();
+const socket = io.connect("https://videoserverwithsocket.onrender.com/");
 function App() {
   const videoRef = useRef();
   const [message, setMessage] = useState({
