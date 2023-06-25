@@ -38,12 +38,7 @@ function App() {
     socket.emit("send_message", { ...message, time: myDate });
     setMessage({ ...message, message: "" });
   };
-  // useEffect(() => {
-  //   let myTime = localStorage.getItem("timer");
-  //   const currentVideo = videoRef.current;
 
-  //   currentVideo.currentTime = Number(myTime);
-  // }, []);
   useEffect(() => {
     if (timerArr.length === 0) return;
     console.log("Hi world, Hello, ", timerArr[0]);
@@ -69,13 +64,6 @@ function App() {
       } else {
         setTimerArr([...timerArr]);
       }
-      // if (msg === "00:00:00") {
-      //   localStorage.removeItem("timer");
-      //   const currentVideo = videoRef.current;
-      //   currentVideo.currentTime = 0;
-      //   return;
-      // }
-      // localStorage.setItem("timer", msg.split(":")[2].slice(0, 2));
     });
   }, [socket, timer]);
   useEffect(() => {
@@ -83,39 +71,27 @@ function App() {
       socket.emit("give_time", "give time");
     }
   }, [time]);
-  // useEffect(() => {
-  //   if (!time) {
-  //     localStorage.removeItem("timer");
-  //   }
-  // }, [time]);
+
   return (
     <div>
-      {timerArr.length>0 && (
+      {timerArr.length > 0 && time ? (
         <>
-          <h1>Hello world</h1>
           <video
             ref={videoRef}
-            width="520"
+            width="100%"
             height="540"
             controls
             muted
-            // style={{ display: `${time ? "block" : "none"}` }}
             autoPlay
           >
             <source src="Assets/videos/parenting.mp4" type="video/mp4" />
           </video>
         </>
+      ) : (
+        <h2>Video will start soon, please wait...</h2>
       )}
-      <ul>
-        {showMessage?.map((el) => (
-          <li>
-            {el.name} => {el.message}
-          </li>
-        ))}
-      </ul>
-      {time ? <h1> {time}</h1> : ""}
-      {/* {timer ? <h1> {timer}</h1> : "no time"} */}
 
+      {/* {time ? <h1> {time}</h1> : ""} */}
       <form onSubmit={sendMessage}>
         <div>
           <input
