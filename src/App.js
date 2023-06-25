@@ -42,11 +42,13 @@ function App() {
   useEffect(() => {
     if (timerArr.length === 0) return;
     console.log("Hi world, Hello, ", timerArr[0]);
-    videoRef.current.onloadstart = () => { 
-      console.log('i want time', timerArr[0])
-      const recentTime = timerArr[0];
-      console.log('loading video')
-      videoRef.current.currentTime = recentTime
+    if (time) {
+      videoRef.current.onloadstart = () => {
+        console.log("i want time", timerArr[0]);
+        const recentTime = timerArr[0];
+        console.log("loading video");
+        videoRef.current.currentTime = recentTime;
+      };
     }
     
   }, [timerArr[0], time]);
