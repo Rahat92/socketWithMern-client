@@ -56,17 +56,22 @@ function App() {
       }
     });
   }, [socket, timer]);
-
   useEffect(() => {
+    if (timerArr.length > 0) {
+      localStorage.setItem("currentTime", timerArr[0]);
+    }
+  },[timerArr[0]])
+  useEffect(() => {
+    const t = localStorage.getItem("currentTime");
     if (timerArr.length === 0) return;
     console.log("Hi world, Hello, ", timerArr[0]);
     if (time) {
       videoRef.current.onloadstart = () => {
         console.log("i want time", timerArr[0]);
-        localStorage.setItem('currentTime', timerArr[0])
+        
         const recentTime = timerArr[0];
         console.log("loading video");
-        videoRef.current.currentTime = recentTime;
+        videoRef.current.currentTime = t;
       };
     }
     return () => setTimerArr([0]);
