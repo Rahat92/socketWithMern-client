@@ -40,20 +40,6 @@ function App() {
   };
 
   useEffect(() => {
-    if (timerArr.length === 0) return;
-    console.log("Hi world, Hello, ", timerArr[0]);
-    if (time) {
-      videoRef.current.onloadstart = () => {
-        console.log("i want time", timerArr[0]);
-        const recentTime = timerArr[0];
-        console.log("loading video");
-        videoRef.current.currentTime = recentTime;
-      };
-    }
-    
-  }, [timerArr[0], time]);
-
-  useEffect(() => {
     socket.on("receive_message", (msg) => {
       setShowMessage([...msg]);
     });
@@ -70,6 +56,21 @@ function App() {
       }
     });
   }, [socket, timer]);
+
+  useEffect(() => {
+    if (timerArr.length === 0) return;
+    console.log("Hi world, Hello, ", timerArr[0]);
+    if (time) {
+      videoRef.current.onloadstart = () => {
+        console.log("i want time", timerArr[0]);
+        const recentTime = timerArr[0];
+        console.log("loading video");
+        videoRef.current.currentTime = recentTime;
+      };
+    }
+    return () => setTimerArr([0]);
+  }, [timerArr[0], time]);
+
   useEffect(() => {
     if (time) {
       socket.emit("give_time", "give time");
