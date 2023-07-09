@@ -68,6 +68,7 @@ function App() {
     if (timerArr.length === 0) return;
     console.log("Hi world, Hello, ", timerArr[0]);
     const t = localStorage.getItem("currentTime");
+    console.log('time',t)
     if (time&&t) {
       videoRef.current.onloadstart = () => {
         console.log("i want time", timerArr[0]);
