@@ -79,7 +79,7 @@ function App() {
       };
     }
     return () => setTimerArr([0]);
-  }, [timerArr[0], time]);
+  }, [timerArr[0], time], localStorage.getItem("currentTime"));
 
   useEffect(() => {
     if (time) {
