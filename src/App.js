@@ -62,10 +62,13 @@ function App() {
     }
   },[timerArr[0]])
   useEffect(() => {
-    const t = localStorage.getItem("currentTime");
+    localStorage.setItem("currentTime", undefined);
+  },[])
+  useEffect(() => {
     if (timerArr.length === 0) return;
     console.log("Hi world, Hello, ", timerArr[0]);
-    if (time) {
+    const t = localStorage.getItem("currentTime");
+    if (time&&t) {
       videoRef.current.onloadstart = () => {
         console.log("i want time", timerArr[0]);
         
@@ -85,7 +88,7 @@ function App() {
 
   return (
     <div>
-      {timerArr.length > 0 && time ? (
+      {timerArr.length > 0 && time&&localStorage.getItem('currentTime') ? (
         <>
           <video
             ref={videoRef}
